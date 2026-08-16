@@ -7,6 +7,8 @@ import {
     KEYWORD_DICTIONARY, 
     PATTERN_DECISION_TREE 
 } from '../data/patternsData';
+import ConceptDiagram from './ConceptDiagram';
+import Tooltip from './Tooltip';
 import { 
     Search, 
     Check, 
@@ -81,14 +83,14 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
     return (
         <div className="space-y-6 animate-fade-in pb-12">
             {/* Top Sub-Nav Switcher */}
-            <div className="flex flex-wrap items-center justify-between gap-4 glass-card p-4 rounded-2xl border border-slate-800/80 shadow-2xl">
+            <div className="flex flex-wrap items-center justify-between gap-4 glass-card p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xl">
                 <div className="flex flex-wrap gap-2">
                     <button
                         onClick={() => setSubTab('patterns')}
-                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                             subTab === 'patterns'
-                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
-                                : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold shadow-md'
+                                : 'bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/60'
                         }`}
                     >
                         <Layers className="w-4 h-4" />
@@ -96,10 +98,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                     </button>
                     <button
                         onClick={() => setSubTab('decision-tree')}
-                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                             subTab === 'decision-tree'
-                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
-                                : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold shadow-md'
+                                : 'bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/60'
                         }`}
                     >
                         <HelpCircle className="w-4 h-4" />
@@ -107,10 +109,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                     </button>
                     <button
                         onClick={() => setSubTab('constraints')}
-                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                             subTab === 'constraints'
-                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
-                                : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold shadow-md'
+                                : 'bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/60'
                         }`}
                     >
                         <Sliders className="w-4 h-4" />
@@ -118,10 +120,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                     </button>
                     <button
                         onClick={() => setSubTab('keywords')}
-                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                        className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                             subTab === 'keywords'
-                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
-                                : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold shadow-md'
+                                : 'bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800/60'
                         }`}
                     >
                         <Zap className="w-4 h-4" />
@@ -130,7 +132,7 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                 </div>
 
                 <div className="flex items-center space-x-2">
-                    <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-xl font-bold">
+                    <span className="text-xs bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1.5 rounded-xl font-bold">
                         {Object.keys(masteredPatterns || {}).length} / {PATTERNS_LIST.length} Patterns Mastered
                     </span>
                 </div>
@@ -148,12 +150,12 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search by pattern name, description, or classic problem (e.g. 'Binary Search', 'Sliding Window', '3Sum')..."
-                                className="w-full bg-slate-900/70 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 transition-colors shadow-inner"
+                                className="w-full bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors shadow-sm"
                             />
                             {searchQuery && (
                                 <button
                                     onClick={() => setSearchQuery('')}
-                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -170,10 +172,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                     <button
                                         key={cat.id}
                                         onClick={() => setActiveCategory(cat.id)}
-                                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 border ${
+                                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 border ${
                                             activeCategory === cat.id
-                                                ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300 shadow-sm'
-                                                : 'bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                                                ? 'bg-emerald-100 dark:bg-emerald-500/20 border-emerald-300 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300 shadow-sm font-bold'
+                                                : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/40'
                                         }`}
                                     >
                                         {cat.label} ({count})
@@ -190,10 +192,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                             return (
                                 <div
                                     key={pattern.id}
-                                    className={`glass-card glass-card-hover rounded-2xl p-5 border flex flex-col justify-between transition-all duration-300 relative group cursor-pointer ${
+                                    className={`glass-card glass-card-hover rounded-2xl p-5 border flex flex-col justify-between transition-all duration-200 relative group cursor-pointer ${
                                         isMastered
-                                            ? 'border-emerald-500/30 bg-emerald-950/10 shadow-[0_0_15px_rgba(16,185,129,0.05)]'
-                                            : 'border-slate-800/80 hover:border-slate-700'
+                                            ? 'border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-950/10 shadow-sm'
+                                            : 'border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700'
                                     }`}
                                     onClick={() => setSelectedPattern(pattern)}
                                 >
@@ -201,10 +203,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                         {/* Card Header */}
                                         <div className="flex items-start justify-between gap-3 mb-3">
                                             <div className="flex items-center space-x-2.5">
-                                                <span className="text-[11px] font-mono font-bold bg-slate-900/90 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-lg">
+                                                <span className="text-[11px] font-mono font-bold bg-slate-100 dark:bg-slate-900/90 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 px-2 py-0.5 rounded-lg">
                                                     #{pattern.id}
                                                 </span>
-                                                <span className="text-xs font-bold text-slate-400 capitalize">
+                                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 capitalize">
                                                     {pattern.category.replace('-', ' ')}
                                                 </span>
                                             </div>
@@ -214,30 +216,30 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                                     togglePatternMastery(pattern.id);
                                                 }}
                                                 title={isMastered ? "Mastered" : "Mark as Mastered"}
-                                                className={`p-1.5 rounded-lg border transition-all duration-300 ${
+                                                className={`p-1.5 rounded-lg border transition-all duration-200 ${
                                                     isMastered
-                                                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-md shadow-emerald-500/20'
-                                                        : 'bg-slate-900/80 text-slate-500 border-slate-800 hover:text-slate-300'
+                                                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm'
+                                                        : 'bg-slate-100 dark:bg-slate-900/80 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-800 hover:text-slate-700 dark:hover:text-slate-300'
                                                 }`}
                                             >
                                                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                                             </button>
                                         </div>
 
-                                        <h3 className="font-display font-bold text-white text-base group-hover:text-emerald-300 transition-colors">
+                                        <h3 className="font-display font-bold text-slate-900 dark:text-white text-base group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
                                             {pattern.name}
                                         </h3>
-                                        <p className="text-xs text-slate-400 mt-2 leading-relaxed line-clamp-2">
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed line-clamp-2">
                                             {pattern.summary}
                                         </p>
                                     </div>
 
                                     {/* Footer Classics count */}
-                                    <div className="mt-5 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs">
+                                    <div className="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-xs">
                                         <span className="text-slate-500 font-medium">
                                             {pattern.classics.length} Classic Problems
                                         </span>
-                                        <span className="text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center space-x-1 font-semibold">
+                                        <span className="text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center space-x-1 font-semibold">
                                             <span>View Template</span>
                                             <span className="text-sm">→</span>
                                         </span>
@@ -251,32 +253,32 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
             {/* SubTab 2: How to Pick a Pattern Decision Flow */}
             {subTab === 'decision-tree' && (
-                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl space-y-6">
+                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xl space-y-6">
                     <div>
                         <div className="flex items-center space-x-3">
-                            <Sparkles className="w-6 h-6 text-emerald-400" />
-                            <h2 className="text-xl font-display font-bold text-white">
+                            <Sparkles className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                            <h2 className="text-xl font-display font-bold text-slate-900 dark:text-white">
                                 How to Pick a Pattern in 30 Seconds
                             </h2>
                         </div>
-                        <p className="text-sm text-slate-400 mt-1">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                             Follow this sequential decision hierarchy when looking at any interview problem statement.
                         </p>
                     </div>
 
-                    <div className="divide-y divide-slate-800/60">
+                    <div className="divide-y divide-slate-200 dark:divide-slate-800/60">
                         {PATTERN_DECISION_TREE.map((step, idx) => (
-                            <div key={idx} className="py-4.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                            <div key={idx} className="py-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
                                 <div className="flex items-start space-x-3.5">
-                                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-900 text-emerald-400 border border-emerald-500/20 text-xs font-bold flex items-center justify-center font-mono">
+                                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30 text-xs font-bold flex items-center justify-center font-mono">
                                         {idx + 1}
                                     </span>
-                                    <span className="text-sm font-semibold text-slate-200">
+                                    <span className="text-sm font-semibold text-slate-900 dark:text-slate-200">
                                         {step.question}
                                     </span>
                                 </div>
                                 <div className="md:text-right pl-9 md:pl-0">
-                                    <span className="inline-block bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-xs px-3 py-1 rounded-xl font-medium">
+                                    <span className="inline-block bg-emerald-100 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/20 text-xs px-3 py-1 rounded-xl font-bold">
                                         👉 {step.yes}
                                     </span>
                                 </div>
@@ -288,35 +290,40 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
             {/* SubTab 3: Constraints Guide */}
             {subTab === 'constraints' && (
-                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl space-y-6">
+                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xl space-y-6">
                     <div>
                         <div className="flex items-center space-x-3">
-                            <Sliders className="w-6 h-6 text-emerald-400" />
-                            <h2 className="text-xl font-display font-bold text-white">
+                            <Sliders className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                            <h2 className="text-xl font-display font-bold text-slate-900 dark:text-white">
                                 Constraint-to-Complexity Cheat Sheet
                             </h2>
                         </div>
-                        <p className="text-sm text-slate-400 mt-1">
-                            The input size <code className="text-emerald-400">n</code> in the problem constraints immediately dictates what algorithmic complexity will pass.
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                            The input size <code className="text-emerald-700 dark:text-emerald-400 font-bold">n</code> in the problem constraints immediately dictates what algorithmic complexity will pass.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {CONSTRAINT_GUIDE.map((item, idx) => (
-                            <div key={idx} className="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
+                            <div key={idx} className="p-5 rounded-xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
                                 <div className="flex items-center justify-between">
-                                    <span className="font-mono font-bold text-sm bg-slate-950 px-3 py-1 rounded-lg text-emerald-400 border border-emerald-500/20">
+                                    <span className="font-mono font-bold text-sm bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-lg text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
                                         {item.constraint}
                                     </span>
-                                    <span className="text-xs font-mono font-semibold text-indigo-300">
-                                        {item.acceptableComplexity}
-                                    </span>
+                                    <Tooltip
+                                        term={`Complexity: ${item.acceptableComplexity}`}
+                                        content={`When problem input size is ${item.constraint}, you have a budget of roughly 10^8 operations per second. Algorithms with ${item.acceptableComplexity} will comfortably run under 1000ms without getting Time Limit Exceeded (TLE).`}
+                                        analogy={item.tip}
+                                        className="text-xs font-mono font-bold text-indigo-800 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 px-2.5 py-1 rounded-lg hover:border-indigo-400 cursor-pointer"
+                                    >
+                                        <span>{item.acceptableComplexity} ℹ️</span>
+                                    </Tooltip>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Viable Approaches</p>
-                                    <p className="text-sm font-semibold text-slate-200 mt-0.5">{item.viableApproaches}</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Viable Approaches</p>
+                                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-200 mt-0.5">{item.viableApproaches}</p>
                                 </div>
-                                <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-850 text-xs text-slate-400">
+                                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 text-xs text-slate-700 dark:text-slate-400">
                                     💡 {item.tip}
                                 </div>
                             </div>
@@ -327,37 +334,50 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
             {/* SubTab 4: Keyword Triggers Dictionary */}
             {subTab === 'keywords' && (
-                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl space-y-6">
+                <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xl space-y-6">
                     <div>
                         <div className="flex items-center space-x-3">
-                            <Zap className="w-6 h-6 text-emerald-400" />
-                            <h2 className="text-xl font-display font-bold text-white">
+                            <Zap className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                            <h2 className="text-xl font-display font-bold text-slate-900 dark:text-white">
                                 Keyword Pattern Recognition
                             </h2>
                         </div>
-                        <p className="text-sm text-slate-400 mt-1">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                             Common keywords in interview problem descriptions and their mapped optimal algorithmic patterns.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {KEYWORD_DICTIONARY.map((item, idx) => (
-                            <div key={idx} className="p-4 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col justify-between space-y-3">
-                                <div>
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                                        Problem Keywords
-                                    </span>
-                                    <p className="text-sm font-semibold text-white mt-1">
-                                        "{item.keyword}"
-                                    </p>
+                        {KEYWORD_DICTIONARY.map((item, idx) => {
+                            const matched = PATTERNS_LIST.find(p => 
+                                p.name.toLowerCase().includes(item.pattern.toLowerCase()) || 
+                                item.pattern.toLowerCase().includes(p.name.toLowerCase()) ||
+                                p.category === item.category
+                            );
+
+                            return (
+                                <div key={idx} className="p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between space-y-3 shadow-sm">
+                                    <div>
+                                        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                            Problem Keywords
+                                        </span>
+                                        <p className="text-sm font-bold text-slate-900 dark:text-white mt-1">
+                                            "{item.keyword}"
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60">
+                                        <Tooltip
+                                            term={item.pattern}
+                                            content={matched?.summary || `Mastering ${item.pattern}: Apply this pattern when problem keywords include "${item.keyword}".`}
+                                            analogy={matched?.whenToUse?.[0] || "Identifies specific data structure layout and boundary criteria to solve efficiently."}
+                                            className="text-xs font-extrabold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 px-3 py-1 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition-colors shadow-sm"
+                                        >
+                                            <span>🎯 {item.pattern} <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono ml-1">ℹ️ ELI5</span></span>
+                                        </Tooltip>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-between pt-2 border-t border-slate-800/60">
-                                    <span className="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
-                                        🎯 {item.pattern}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             )}
@@ -365,46 +385,52 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
             {/* Pattern Detail Modal / Drawer via Portal */}
             {selectedPattern && typeof document !== 'undefined' && createPortal(
                 <div 
-                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in"
                     onClick={() => setSelectedPattern(null)}
                 >
                     <div 
-                        className="bg-slate-900 border border-slate-750 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6"
+                        className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 text-slate-800 dark:text-slate-200"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Modal Header */}
-                        <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+                        <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                             <div>
                                 <div className="flex items-center space-x-3 mb-1">
-                                    <span className="text-xs font-mono font-bold bg-slate-950 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+                                    <span className="text-xs font-mono font-bold bg-slate-100 dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 px-2.5 py-1 rounded-lg">
                                         Pattern #{selectedPattern.id}
                                     </span>
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                         {selectedPattern.category}
                                     </span>
                                 </div>
-                                <h2 className="text-2xl font-display font-extrabold text-white">
+                                <h2 className="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
                                     {selectedPattern.name}
                                 </h2>
+                                <p className="text-xs text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">
+                                    {selectedPattern.summary}
+                                </p>
                             </div>
                             <button
                                 onClick={() => setSelectedPattern(null)}
-                                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
                             >
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
 
+                        {/* Visual Algorithmic Infographic Diagram */}
+                        <ConceptDiagram conceptKey={selectedPattern.name} />
+
                         {/* When to Use */}
                         <div className="space-y-2">
-                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5">
+                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 flex items-center space-x-1.5">
                                 <Sparkles className="w-3.5 h-3.5" />
                                 <span>When to Use (Triggers)</span>
                             </h4>
-                            <ul className="space-y-1.5 text-sm text-slate-300">
+                            <ul className="space-y-1.5 text-sm text-slate-700 dark:text-slate-300">
                                 {selectedPattern.whenToUse.map((reason, idx) => (
                                     <li key={idx} className="flex items-start space-x-2">
-                                        <span className="text-emerald-400 font-bold">•</span>
+                                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
                                         <span>{reason}</span>
                                     </li>
                                 ))}
@@ -414,18 +440,18 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                         {/* Code Template with Copy */}
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
-                                    <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+                                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                                    <Code2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                                     <span>Algorithm Template / Pseudocode</span>
                                 </h4>
                                 <button
                                     onClick={() => handleCopy(selectedPattern.template)}
-                                    className="flex items-center space-x-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
+                                    className="flex items-center space-x-1.5 text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors font-semibold"
                                 >
                                     {copied ? (
                                         <>
-                                            <Check className="w-3.5 h-3.5 text-emerald-400" />
-                                            <span className="text-emerald-400 font-semibold">Copied!</span>
+                                            <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                                            <span className="text-emerald-700 dark:text-emerald-400 font-semibold">Copied!</span>
                                         </>
                                     ) : (
                                         <>
@@ -435,7 +461,7 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                     )}
                                 </button>
                             </div>
-                            <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 overflow-x-auto">
+                            <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 overflow-x-auto shadow-inner">
                                 <pre className="text-xs font-mono text-emerald-300 leading-relaxed">
                                     <code>{selectedPattern.template}</code>
                                 </pre>
@@ -444,14 +470,14 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
                         {/* Pitfalls & Edge Cases */}
                         <div className="space-y-2">
-                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-amber-400 flex items-center space-x-1.5">
+                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400 flex items-center space-x-1.5">
                                 <AlertTriangle className="w-3.5 h-3.5" />
                                 <span>Common Pitfalls & Edge Cases</span>
                             </h4>
-                            <ul className="space-y-1.5 text-sm text-slate-300">
+                            <ul className="space-y-1.5 text-sm text-slate-700 dark:text-slate-300">
                                 {selectedPattern.pitfalls.map((pitfall, idx) => (
                                     <li key={idx} className="flex items-start space-x-2">
-                                        <span className="text-amber-400 font-bold">⚠️</span>
+                                        <span className="text-amber-500 font-bold">⚠️</span>
                                         <span>{pitfall}</span>
                                     </li>
                                 ))}
@@ -460,8 +486,8 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
                         {/* Classic Problems */}
                         <div className="space-y-2.5">
-                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
-                                <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                            <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                                <BookOpen className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                                 <span>Classic LeetCode Problems</span>
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -471,10 +497,10 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                         href={problem.link}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-emerald-500/30 hover:bg-slate-950 transition-all duration-200 group"
+                                        className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-500/30 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-200 group"
                                     >
                                         <div className="flex items-center space-x-2 min-w-0 pr-2">
-                                            <span className="text-xs font-bold text-slate-200 group-hover:text-emerald-300 truncate">
+                                            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 truncate">
                                                 {problem.name}
                                             </span>
                                         </div>
@@ -482,7 +508,7 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                                             <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${getDifficultyBadge(problem.difficulty)}`}>
                                                 {problem.difficulty}
                                             </span>
-                                            <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-emerald-400" />
+                                            <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
                                         </div>
                                     </a>
                                 ))}
@@ -490,15 +516,15 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
                         </div>
 
                         {/* Modal Action Bar */}
-                        <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                             <button
                                 onClick={() => {
                                     togglePatternMastery(selectedPattern.id);
                                 }}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 border ${
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border ${
                                     masteredPatterns[selectedPattern.id]
-                                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-lg shadow-emerald-500/20'
-                                        : 'bg-slate-800 text-white border-slate-700 hover:bg-emerald-600 hover:border-emerald-500'
+                                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-md'
+                                        : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700 hover:bg-emerald-600 hover:text-white'
                                 }`}
                             >
                                 <Check className="w-4 h-4 stroke-[3]" />
@@ -507,7 +533,7 @@ export default function PatternsView({ masteredPatterns, togglePatternMastery })
 
                             <button
                                 onClick={() => setSelectedPattern(null)}
-                                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 transition-colors"
+                                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                             >
                                 Close
                             </button>
