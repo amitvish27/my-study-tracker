@@ -17,6 +17,7 @@ import { useTheme } from '../hooks/useTheme';
 
 export default function Navbar({ activeTab, setActiveTab, onExport, onImport }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
     const { theme, toggleTheme, isDark } = useTheme();
 
     const tabs = [
@@ -51,9 +52,15 @@ export default function Navbar({ activeTab, setActiveTab, onExport, onImport }) 
         setMobileMenuOpen(false);
     };
 
+    const handleThemeToggle = () => {
+        setIsAnimating(true);
+        toggleTheme();
+        setTimeout(() => setIsAnimating(false), 800);
+    };
+
     return (
         <>
-            <nav className="bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800/80 sticky top-0 z-50 transition-colors duration-300">
+            <nav className="bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800/80 sticky top-0 z-50 transition-colors duration-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 gap-3">
                         {/* Brand / Logo */}
@@ -105,21 +112,40 @@ export default function Navbar({ activeTab, setActiveTab, onExport, onImport }) 
                             })}
                         </div>
 
-                        {/* Right Controls: Light / Dark Switch & Backups */}
+                        {/* Right Controls: Tube-Light / Sunrise-Sunset Switch & Backups */}
                         <div className="flex items-center space-x-2">
-                            {/* Light / Dark Mode Toggle Switch */}
+                            {/* Sunrise / Sunset Tube-Light Switch */}
                             <button
-                                onClick={toggleTheme}
-                                title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                                aria-label="Toggle light/dark theme"
-                                className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-all duration-200 shadow-sm"
+                                onClick={handleThemeToggle}
+                                title={isDark ? "Sunrise: Turn on Light Tube (Light Mode)" : "Sunset: Power down into Night (Dark Mode)"}
+                                aria-label="Toggle light and dark mode with sunrise/sunset tube light transition"
+                                className={`relative p-1 rounded-full bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition-all duration-500 overflow-hidden shadow-inner group ${
+                                    isAnimating 
+                                        ? isDark 
+                                            ? 'sunset-down' 
+                                            : 'tube-light-on' 
+                                        : isDark 
+                                            ? 'hover:border-indigo-500/50 hover:shadow-[0_0_12px_rgba(99,102,241,0.25)]' 
+                                            : 'hover:border-amber-400/60 hover:shadow-[0_0_12px_rgba(245,158,11,0.3)]'
+                                }`}
                             >
-                                <div className="flex items-center space-x-1 px-1.5 py-0.5">
-                                    <div className={`p-1 rounded-lg transition-all ${!isDark ? 'bg-amber-100 text-amber-600 shadow-sm font-bold scale-105' : 'text-slate-400'}`}>
-                                        <Sun className="w-3.5 h-3.5" />
+                                <div className="flex items-center space-x-1.5 px-1 py-0.5">
+                                    {/* Sun (Sunrise / Tube-Light Light Mode) */}
+                                    <div className={`p-1.5 rounded-full transition-all duration-500 flex items-center justify-center ${
+                                        !isDark 
+                                            ? 'bg-amber-400 text-slate-950 shadow-[0_0_14px_rgba(251,191,36,0.8)] scale-110 rotate-0' 
+                                            : 'text-slate-400 scale-90 -rotate-90 opacity-60'
+                                    }`}>
+                                        <Sun className={`w-3.5 h-3.5 transition-transform duration-700 ${!isDark ? 'animate-spin-slow' : ''}`} />
                                     </div>
-                                    <div className={`p-1 rounded-lg transition-all ${isDark ? 'bg-indigo-950/80 text-indigo-300 shadow-sm font-bold scale-105' : 'text-slate-400'}`}>
-                                        <Moon className="w-3.5 h-3.5" />
+
+                                    {/* Moon (Sunset / Twilight Dark Mode) */}
+                                    <div className={`p-1.5 rounded-full transition-all duration-500 flex items-center justify-center ${
+                                        isDark 
+                                            ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-[0_0_14px_rgba(99,102,241,0.7)] scale-110 rotate-0' 
+                                            : 'text-slate-400 scale-90 rotate-90 opacity-60'
+                                    }`}>
+                                        <Moon className="w-3.5 h-3.5 transition-transform duration-700" />
                                     </div>
                                 </div>
                             </button>
@@ -212,25 +238,25 @@ export default function Navbar({ activeTab, setActiveTab, onExport, onImport }) 
                             })}
                         </div>
 
-                        {/* Mobile Controls: Light/Dark Switch & Backup actions */}
+                        {/* Mobile Controls: Tube-Light Theme Switch & Backup actions */}
                         <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
                             <button
-                                onClick={toggleTheme}
+                                onClick={handleThemeToggle}
                                 className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300"
                             >
                                 <span className="flex items-center space-x-2">
-                                    <span>Theme</span>
+                                    <span>Atmosphere</span>
                                 </span>
-                                <div className="flex items-center space-x-1.5 font-mono">
+                                <div className="flex items-center space-x-2 font-mono">
                                     {isDark ? (
-                                        <span className="flex items-center space-x-1 text-indigo-400">
+                                        <span className="flex items-center space-x-1.5 text-indigo-400 bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-500/30">
                                             <Moon className="w-3.5 h-3.5" />
-                                            <span>Dark Mode</span>
+                                            <span>Nightfall (Dark)</span>
                                         </span>
                                     ) : (
-                                        <span className="flex items-center space-x-1 text-amber-600">
-                                            <Sun className="w-3.5 h-3.5" />
-                                            <span>Light Mode</span>
+                                        <span className="flex items-center space-x-1.5 text-amber-700 bg-amber-100 px-2.5 py-1 rounded-lg border border-amber-300">
+                                            <Sun className="w-3.5 h-3.5 text-amber-600" />
+                                            <span>Sunrise (Light)</span>
                                         </span>
                                     )}
                                 </div>
